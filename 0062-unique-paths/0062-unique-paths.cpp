@@ -18,7 +18,7 @@ public:
         int N = m+n-2;
         int R= min(m-1,n-1);
         long long ans=1;
-        for(int i=1;i<=R;i++){
+        for(int i=0;i<R;i++){
             ans = ans* (N-i);
             ans= ans/(i+1);
         }
