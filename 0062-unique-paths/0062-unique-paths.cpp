@@ -16,7 +16,7 @@ public:
 
         // 2nd approach -> combination
         int N = m+n-2;
-        int R= min(m-1,n-1);
+        int R= m-1;
         long long ans=1;
         for(int i=1;i<=R;i++){
             ans = ans* (N-R+i);
