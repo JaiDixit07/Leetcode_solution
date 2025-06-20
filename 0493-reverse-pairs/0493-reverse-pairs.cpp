@@ -1,6 +1,5 @@
 class Solution {
 public:
-    int cnt=0;
     void merge(vector<int> &arr, int low, int mid, int high) {
         vector<int> temp; // temporary array
         int left = low;      // starting index of left half of arr
@@ -37,27 +36,32 @@ public:
             arr[i] = temp[i - low];
         }
     }
-    void countpairs(vector<int>&arr,int low,int mid,int high){
+    int countpairs(vector<int>&arr,int low,int mid,int high){
         int right=mid+1;
+        int cnt=0;
         for(int i=low;i<=mid;i++){
             while(right<=high && arr[i]>2LL*arr[right]){
                 right++;
             }
             cnt+=(right-(mid+1));
         }
+        return cnt;
     }
-    void mergeSort(vector<int> &arr, int low, int high) {
-        if (low >= high) return;
+    int mergeSort(vector<int> &arr, int low, int high) {
+        int cnt=0;
+        if (low >= high) return cnt;
         int mid = (low + high) / 2 ;
-        mergeSort(arr, low, mid);  // left half
-        mergeSort(arr, mid + 1, high); // right half
-        countpairs(arr,low,mid,high);
+        
+        cnt+=mergeSort(arr, low, mid);  // left half
+        cnt+=mergeSort(arr, mid + 1, high); // right half
+        cnt+=countpairs(arr,low,mid,high);
         merge(arr, low, mid, high);  // merging sorted halves
+        return cnt;
     }
 
     int reversePairs(vector<int>& nums) {
         int n=nums.size();
-        mergeSort(nums,0,n-1);
-        return cnt;
+        return mergeSort(nums,0,n-1);
+
     }
 };
